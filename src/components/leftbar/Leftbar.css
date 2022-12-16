@@ -1,0 +1,66 @@
+.leftbar {
+	flex: 3;
+	height: calc(100% - 50px);
+	overflow-y: scroll;
+	position: -webkit-sticky;
+	position: sticky;
+	top: 50px;
+}
+::-webkit-scrollbar {
+	width: 5px;
+}
+::-webkit-scrollbar-track {
+	background-color: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+	background-color: rgb(179, 179, 179);
+}
+.leftbarWrapper {
+	padding: 20px;
+}
+.leftbarList {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+.leftbarListItem {
+	display: flex;
+	align-items: center;
+	margin-bottom: 20px;
+}
+.leftbarListItemText {
+	font-size: 1rem;
+}
+.leftbarIcon {
+	margin-right: 15px;
+}
+.leftbarButton {
+	width: -moz-fit-content;
+	width: fit-content;
+	border: none;
+	padding: 15px;
+	border-radius: 5px;
+	font-weight: 500;
+	margin-left: 50%;
+	transform: translate(-50%);
+}
+.leftbar hr {
+	margin: 20px 0;
+}
+.leftbarFriendList {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+.leftbarFriend {
+	display: flex;
+	align-items: center;
+	margin-bottom: 15px;
+}
+.leftbarFriendImg {
+	width: 32px;
+	height: 32px;
+	border-radius: 50%;
+	object-fit: cover;
+	margin-right: 10px;
+}

@@ -1,0 +1,89 @@
+/* first : navbar */
+.navbarContainer {
+	height: 50px;
+	width: 100%;
+	background-color: #1877f2;
+	display: flex;
+	align-items: center;
+	position: sticky;
+	top: 0;
+	z-index: 9999;
+}
+.navbarLeft {
+	flex: 3;
+}
+.navbarLeft .logo {
+	margin-left: 20px;
+	font-weight: 900;
+	font-size: 25px;
+	color: whitesmoke;
+	cursor: pointer;
+}
+.navbarCenter {
+	flex: 5;
+}
+.searchBar {
+	overflow: hidden;
+	width: 100%;
+	height: 30px;
+	background-color: white;
+	border-radius: 30px;
+	display: flex;
+	align-items: center;
+}
+.searchIcon {
+	font-size: 20px !important;
+	margin-left: 10px;
+}
+.searchInput {
+	width: 70%;
+	border: none;
+}
+.searchInput:focus {
+	outline: none;
+}
+.navbarRight {
+	flex: 4;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	color: white;
+}
+.navbarLink {
+	margin-right: 10px;
+	font-size: 14px;
+	cursor: pointer;
+}
+.navIcons {
+	display: flex;
+	justify-content: space-around;
+	width: 25%;
+}
+.navbarIcons {
+	cursor: pointer;
+	/* margin-right: 15px; */
+	position: relative;
+}
+.navbarItemCount {
+	position: absolute;
+	width: 15px;
+	height: 15px;
+	background-color: red;
+	border-radius: 50%;
+	color: white;
+	text-align: center;
+	top: -5px;
+	right: -5px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 10px;
+}
+.navbarProfilePic {
+	width: 32px;
+	height: 32px;
+	object-fit: cover;
+	border-radius: 50%;
+	cursor: pointer;
+}
+/* end of navbar */

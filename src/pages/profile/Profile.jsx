@@ -11,13 +11,9 @@ export default function Profile() {
 	const publicFolder = process.env.PUBLIC_URL;
 	const [user, setUser] = useState({});
 	const username = useParams().username;
-	console.log(`got username and it is ${username}`);
 	useEffect(() => {
 		const fetchUser = async () => {
 			const res = await axios.get(`/api/users?username=${username}`);
-			console.log(
-				`d5lt fetch user we b3t el request we el response ${res.data}`
-			);
 			setUser(res.data);
 		};
 		fetchUser();

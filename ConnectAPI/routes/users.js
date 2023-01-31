@@ -1,7 +1,6 @@
 const router = require("express").Router();
 const User = require("../models/Users");
 const bcrypt = require("bcrypt");
-const { response } = require("express");
 
 // update user info
 router.put("/:id", async (req, res) => {
@@ -18,7 +17,7 @@ router.put("/:id", async (req, res) => {
 			const user = await User.findByIdAndUpdate(req.body.userId, {
 				$set: req.body,
 			});
-			return res.status(200).json("user has been updated");
+			return res.status(200).json("user has been updated", user);
 		} catch (error) {
 			return res.status(500).json(error);
 		}
@@ -41,15 +40,13 @@ router.delete("/:id", async (req, res) => {
 
 // get user by id or name
 router.get("/", async (req, res) => {
-	console.log(
-		`inside get user by name or id name = ${req.query.username} and id = ${req.query.userId}`
-	);
 	const userId = req.query.userId;
 	const username = req.query.username;
 	try {
 		const user = userId
 			? await User.findById(userId)
 			: await User.findOne({ username: username });
+		console.log(user);
 		const { password, UpdatedAt, ...other } = user._doc;
 		res.status(200).json(other);
 	} catch (error) {

@@ -1,0 +1,19 @@
+.conversation {
+	display: flex;
+	align-items: center;
+	padding: 1rem;
+	gap: 1rem;
+	cursor: pointer;
+	&:hover {
+		background-color: rgb(240, 239, 239);
+	}
+	img {
+		width: 2.5rem;
+		height: 2.5rem;
+		border-radius: 50%;
+		object-fit: cover;
+	}
+	span {
+		font-weight: 500;
+	}
+}

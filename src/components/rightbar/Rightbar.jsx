@@ -10,8 +10,8 @@ import { Add, Remove } from "@mui/icons-material";
 
 export default function Rightbar({ user }) {
 	const publicFolder = process.env.PUBLIC_URL;
-	const [friends, setFriends] = useState([]);
 	const { user: currentUser, dispatch } = useContext(AuthContext);
+	const [friends, setFriends] = useState([]);
 	const [followed, setFollowed] = useState(
 		currentUser.followings.includes(user?._id)
 	);
@@ -23,14 +23,14 @@ export default function Rightbar({ user }) {
 	useEffect(() => {
 		const getFriends = async () => {
 			try {
-				const friendList = await axios.get(`/api/users/friends/${user._id}`);
-				setFriends(friendList.data);
+				const res = await axios.get(`/api/users/friends/${currentUser._id}`);
+				setFriends(res.data);
 			} catch (error) {
 				console.log(error);
 			}
 		};
-		user && getFriends();
-	}, [user]);
+		currentUser && getFriends();
+	}, [currentUser]);
 	const handleClick = async () => {
 		try {
 			if (followed) {
@@ -44,20 +44,12 @@ export default function Rightbar({ user }) {
 				});
 				dispatch({ type: "Follow", payload: user._id });
 			}
-			// followed
-			// 	? await axios.put(`/api/users/${user._id}/unfollow`, {
-			// 			userId: currentUser._id,
-			// 	  })
-			// 	: await axios.put(`/api/users/${user._id}/follow`, {
-			// 			userId: currentUser._id,
-			// 	  });
 		} catch (error) {
 			console.log(error);
 		}
 		setFollowed(!followed);
 	};
 	const HomeRightbar = () => {
-		const { user } = useContext(AuthContext);
 		return (
 			<>
 				<div className="birthdayContainer">
@@ -76,11 +68,16 @@ export default function Rightbar({ user }) {
 					className="rightbarAd"
 				/>
 				<h4 className="rightbarTitle">Online Friends</h4>
-				<ul className="rightbarFriendList">
-					{user.followings.map((u) => (
-						<Online key={u.id} user={u} />
+				<div className="rightbarFriendList">
+					{friends.map((u) => (
+						<Link
+							key={u._id}
+							to="/messenger"
+						>
+							<Online user={u} />
+						</Link>
 					))}
-				</ul>
+				</div>
 			</>
 		);
 	};
@@ -88,8 +85,11 @@ export default function Rightbar({ user }) {
 		return (
 			<>
 				{user.username !== currentUser.username && (
-					<button className="rightbarFollowButton" onClick={handleClick}>
-						{followed ? <Remove /> : <Add />}
+					<button
+						className="rightbarFollowButton"
+						onClick={handleClick}
+					>
+						{followed ? <Add /> : <Remove />}
 						{followed ? "follow" : "unfollow"}
 					</button>
 				)}
@@ -120,14 +120,18 @@ export default function Rightbar({ user }) {
 						<Link
 							to={`/profile/${friend.username}`}
 							style={{ textDecoration: "none" }}
+							key={friend._id}
 						>
-							<div className="rightbarFollowing">
+							<div
+								key={friend._id}
+								className="rightbarFollowing"
+							>
 								<img
 									className="rightbarFollowingImg"
 									src={
 										friend.profilePicture
-											? `/person/${friend.profilePicture}`
-											: "/person/noAvatar.png"
+											? `${process.env.PUBLIC_URL}/assets/person/${friend.profilePicture}`
+											: process.env.PUBLIC_URL + "/assets/person/noAvatar.png"
 									}
 									alt=""
 								/>

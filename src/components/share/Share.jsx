@@ -49,7 +49,7 @@ export default function Share() {
 					<img
 						src={
 							user.profilePicture
-								? PUBLIC_URL + "/assets/" + user.profilePicture
+								? PUBLIC_URL + "/assets/person/" + user.profilePicture
 								: PUBLIC_URL + "/assets/person/noAvatar.png"
 						}
 						alt=""
@@ -65,14 +65,29 @@ export default function Share() {
 				<hr />
 				{file && (
 					<div className="shareImgContainer">
-						<img alt="img to upload" src={URL.createObjectURL(file)}></img>
-						<Cancel onClick={() => setFile(null)} className="shareCancelImg" />
+						<img
+							alt="img to upload"
+							src={URL.createObjectURL(file)}
+						></img>
+						<Cancel
+							onClick={() => setFile(null)}
+							className="shareCancelImg"
+						/>
 					</div>
 				)}
-				<form className="shareBottom" onSubmit={submitHandler}>
+				<form
+					className="shareBottom"
+					onSubmit={submitHandler}
+				>
 					<div className="shareOptions">
-						<label htmlFor="file" className="shareOption">
-							<PermMedia htmlColor="tomato" className="shareIcon"></PermMedia>
+						<label
+							htmlFor="file"
+							className="shareOption"
+						>
+							<PermMedia
+								htmlColor="tomato"
+								className="shareIcon"
+							></PermMedia>
 							<span className="shareOptionText">Photo/video</span>
 							<input
 								style={{ display: "none" }}
@@ -87,11 +102,17 @@ export default function Share() {
 							/>
 						</label>
 						<div className="shareOption">
-							<Label htmlColor="blue" className="shareIcon"></Label>
+							<Label
+								htmlColor="blue"
+								className="shareIcon"
+							></Label>
 							<span className="shareOptionText">tag</span>
 						</div>
 						<div className="shareOption">
-							<Room htmlColor="green" className="shareIcon"></Room>
+							<Room
+								htmlColor="green"
+								className="shareIcon"
+							></Room>
 							<span className="shareOptionText">location</span>
 						</div>
 						<div className="shareOption">
@@ -102,7 +123,10 @@ export default function Share() {
 							<span className="shareOptionText">feelings</span>
 						</div>
 					</div>
-					<button className="shareButton" type="submit">
+					<button
+						className="shareButton"
+						type="submit"
+					>
 						Share
 					</button>
 				</form>

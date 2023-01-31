@@ -1,0 +1,37 @@
+.message {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.message.own {
+  align-items: flex-end;
+}
+.message.own .messageTop p {
+  background-color: rgb(244, 242, 242);
+  color: black;
+}
+
+.messageTop {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.messageTop img {
+  width: 1.5rem;
+  height: 1.5rem;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 50%;
+}
+.messageTop p {
+  padding: 0.6rem;
+  border-radius: 1rem;
+  background-color: #1877f2;
+  color: white;
+  max-width: 25rem;
+}
+
+.messageBottom {
+  color: gray;
+  font-size: small;
+}/*# sourceMappingURL=Message.css.map */

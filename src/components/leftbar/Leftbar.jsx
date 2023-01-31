@@ -16,7 +16,6 @@ import CloseFriends from "../closeFriends/CloseFriends";
 
 export default function Leftbar() {
 	const { user } = useContext(AuthContext);
-	console.log(`user friends are ${user.followings.length}`);
 	return (
 		<div className="leftbar">
 			<div className="leftbarWrapper">
@@ -60,12 +59,15 @@ export default function Leftbar() {
 				</ul>
 				<button className="leftbarButton">Show More</button>
 				<hr />
-				<ul className="leftbarFriendList">
-					{user?.followings.map((u) => (
-						<CloseFriends key={u._id} friend={u} />
-					))}
-				</ul>
+				<ul className="leftbarFriendList"></ul>
 			</div>
 		</div>
 	);
 }
+
+// {user?.followings.map((u) => (
+// 	<CloseFriends
+// 		key={u._id}
+// 		friend={u}
+// 	/>
+// ))}

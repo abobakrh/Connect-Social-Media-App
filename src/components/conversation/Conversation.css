@@ -1,0 +1,20 @@
+.conversation {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  gap: 1rem;
+  cursor: pointer;
+}
+.conversation:hover {
+  background-color: rgb(240, 239, 239);
+}
+.conversation img {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.conversation span {
+  font-weight: 500;
+}/*# sourceMappingURL=Conversation.css.map */

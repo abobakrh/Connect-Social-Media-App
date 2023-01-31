@@ -14,6 +14,8 @@ const path = require("path");
 const userRoute = require("./routes/users");
 const authRoute = require("./routes/auth");
 const postRoute = require("./routes/posts");
+const conversationsRoute = require("./routes/conversations");
+const messagesRoute = require("./routes/messages");
 ////////////////////////////////////////////
 
 // initializing dotenv
@@ -61,6 +63,8 @@ app.post("/api/upload", upload.single("file"), (req, res) => {
 app.use("/api/users", userRoute);
 app.use("/api/auth", authRoute);
 app.use("/posts", postRoute);
+app.use("/api/conversations", conversationsRoute);
+app.use("/api/messages", messagesRoute);
 /////////////////////////////////
 
 // running server on port 8800 ///////////

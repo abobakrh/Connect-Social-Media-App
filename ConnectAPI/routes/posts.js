@@ -50,7 +50,6 @@ router.delete("/:postId", async (req, res) => {
 });
 // like a post
 router.put("/:postId/like", async (req, res) => {
-	console.log("inside like route");
 	try {
 		const post = await Post.findById(req.params.postId);
 		if (!post.likes.includes(req.body.userId)) {
@@ -80,7 +79,6 @@ router.get("/:postId", async (req, res) => {
 // get timeline posts
 router.get("/timeline/:userId", async (req, res) => {
 	try {
-		console.log(`fetching timeline posts for userid ${req.params.userId}`);
 		const currentUser = await Users.findById(req.params.userId);
 		const userPosts = await Post.find({ userId: currentUser._id });
 		const friendsPosts = await Promise.all(
@@ -95,7 +93,6 @@ router.get("/timeline/:userId", async (req, res) => {
 });
 // get user's entire posts
 router.get("/profile/:username", async (req, res) => {
-	console.log(`getting all posts for profile of ${req.params.username}`);
 	try {
 		const currentUser = await Users.findOne({ username: req.params.username });
 		const userPosts = await Post.find({ userId: currentUser._id });

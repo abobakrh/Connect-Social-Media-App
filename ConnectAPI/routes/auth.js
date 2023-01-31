@@ -20,19 +20,13 @@ router.post("/register", async (req, res) => {
 });
 
 const checkPassword = async (pw2Check, dbPw) => {
-	const ans = await bcrypt.compare(pw2Check, dbPw);
-	console.log(
-		`passwords to compare are ${pw2Check} and ${dbPw} and the result is ${ans}`
-	);
-	return ans;
+	return await bcrypt.compare(pw2Check, dbPw);
 };
 
 //Login
 router.post("/login", async (req, res) => {
 	try {
-		console.log(`email to search for is ${req.body.email}`);
 		const user = await User.findOne({ email: req.body.email });
-		console.log(`found user is ${user?.username}`);
 		!user
 			? res.status(404).send("user not found").end()
 			: (await checkPassword(req.body.password, user.password))

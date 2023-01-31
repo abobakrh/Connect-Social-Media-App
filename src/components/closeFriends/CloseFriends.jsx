@@ -5,7 +5,7 @@ export default function CloseFriends({ friend }) {
 	return (
 		<li className="leftbarFriend">
 			<img
-				src={publicFolder + "/assets/" + friend.profilePicture}
+				src={process.env.PUBLIC_URL + "/assets/person/" + friend.profilePicture}
 				alt=""
 				className="leftbarFriendImg"
 			/>

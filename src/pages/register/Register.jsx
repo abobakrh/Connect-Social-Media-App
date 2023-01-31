@@ -2,6 +2,7 @@ import axios from "axios";
 import { useRef } from "react";
 import "./Register.css";
 import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 export default function Register() {
 	const username = useRef();
 	const password = useRef();
@@ -35,9 +36,22 @@ export default function Register() {
 						Connect with friends and the world around you
 					</span>
 				</div>
-				<form onSubmit={handleRegisterClick} className="loginRight">
-					<input required type="text" placeholder="Username" ref={username} />
-					<input required ref={email} type="email" placeholder="Email" />
+				<form
+					onSubmit={handleRegisterClick}
+					className="loginRight"
+				>
+					<input
+						required
+						type="text"
+						placeholder="Username"
+						ref={username}
+					/>
+					<input
+						required
+						ref={email}
+						type="email"
+						placeholder="Email"
+					/>
 					<input
 						required
 						ref={password}
@@ -53,7 +67,9 @@ export default function Register() {
 						minLength="6"
 					/>
 					<button type="submit">Sign Up</button>
-					<button>Log Into Account</button>
+					<button>
+						<Link to="/login">Log Into Account</Link>
+					</button>
 				</form>
 			</div>
 		</div>

@@ -10,7 +10,10 @@ export default function Navbar() {
 	return (
 		<div className="navbarContainer">
 			<div className="navbarLeft">
-				<Link to="/" style={{ textDecoration: "none" }}>
+				<Link
+					to="/"
+					style={{ textDecoration: "none" }}
+				>
 					<p className="logo">Connect</p>
 				</Link>
 			</div>
@@ -53,7 +56,7 @@ export default function Navbar() {
 					<img
 						src={
 							user.profilePicture
-								? publicUrl + "/assets/" + user.profilePicture
+								? publicUrl + "/assets/person/" + user.profilePicture
 								: publicUrl + "/assets/person/noAvatar.png"
 						}
 						alt=""

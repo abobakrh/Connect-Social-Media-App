@@ -7,7 +7,6 @@ import { AuthContext } from "../../context/AuthContext";
 
 export default function Feed({ username }) {
 	const { user } = useContext(AuthContext);
-	console.log(`ana fel feed we a5dt username : ${username}`);
 	const [posts, setPosts] = useState([]);
 	useEffect(() => {
 		const fetchPosts = async () => {
@@ -19,7 +18,6 @@ export default function Feed({ username }) {
 					return new Date(p2.createdAt) - new Date(p1.createdAt);
 				})
 			);
-			console.log(`feed for user is ${res.data}`);
 		};
 		fetchPosts();
 	}, [username, user._id]);

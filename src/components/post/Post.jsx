@@ -6,7 +6,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
-import ReactTimeAgo from "react-time-ago";
+import { format } from "timeago.js";
 
 export default function Post({ post }) {
 	const [like, setLike] = useState(post.likes.length);
@@ -19,11 +19,9 @@ export default function Post({ post }) {
 		setisLiked(post.likes.includes(currentUser._id));
 	}, [currentUser._id, post.likes]);
 	useEffect(() => {
-		console.log("inside use effect of post");
 		const fetchUser = async () => {
 			const res = await axios.get(`/api/users?userId=${post.userId}`);
 			setUser(res.data);
-			console.log(`current user data is: ${res.data}`);
 		};
 		fetchUser();
 	}, [post.userId]);
@@ -53,7 +51,7 @@ export default function Post({ post }) {
 							/>
 						</Link>
 						<span className="postProfileName">{user.username}</span>
-						<span className="postDate">{post.createdAt}</span>
+						<span className="postDate">{format(post.createdAt)}</span>
 					</div>
 					<div className="postTopRight">
 						<MoreVert></MoreVert>
@@ -61,7 +59,11 @@ export default function Post({ post }) {
 				</div>
 				<div className="postCenter">
 					<span className="postCaption">{post.desc}</span>
-					<img src={`/${post.img}`} alt="" className="postImg" />
+					<img
+						src={`/${post.img}`}
+						alt=""
+						className="postImg"
+					/>
 				</div>
 				<div className="postBottom">
 					<div className="postBottomLeft">

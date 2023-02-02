@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useState } from "react";
-import { MoreVert } from "@mui/icons-material";
+import { DeleteOutlineOutlined, MoreVert } from "@mui/icons-material";
 import "./Post.css";
 import axios from "axios";
 import { Link } from "react-router-dom";
@@ -8,10 +8,11 @@ import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { format } from "timeago.js";
 
-export default function Post({ post }) {
+export default function Post({ post, setPosts, posts }) {
 	const [like, setLike] = useState(post.likes.length);
 	const [isLiked, setisLiked] = useState(false);
 	const [user, setUser] = useState({});
+	const [menuOpen, setMenuOpen] = useState(false);
 	const { user: currentUser } = useContext(AuthContext);
 	const publicUrl = process.env.PUBLIC_URL;
 
@@ -29,10 +30,24 @@ export default function Post({ post }) {
 	const likeHandler = async () => {
 		try {
 			await axios.put(`/posts/${post._id}/like`, { userId: currentUser._id });
-		} catch (error) {}
+		} catch (error) {
+			console.log(error);
+		}
 		setLike(isLiked ? like - 1 : like + 1);
 		setLike(isLiked ? like - 1 : like + 1);
 		setisLiked(!isLiked);
+	};
+	const deletePost = async () => {
+		try {
+			await axios.delete(`/posts/${post._id}`, {
+				data: { userId: currentUser._id },
+			});
+			console.log(`post with id ${post._id} deleted`);
+			const newPosts = posts.filter((p) => p._id !== post._id);
+			setPosts(newPosts);
+		} catch (error) {
+			console.log(error);
+		}
 	};
 	return (
 		<div className="post">
@@ -54,7 +69,17 @@ export default function Post({ post }) {
 						<span className="postDate">{format(post.createdAt)}</span>
 					</div>
 					<div className="postTopRight">
-						<MoreVert></MoreVert>
+						<div onClick={() => setMenuOpen(!menuOpen)}>
+							<MoreVert></MoreVert>
+							{menuOpen ? (
+								<ul className="menu">
+									<li onClick={() => deletePost()}>
+										<DeleteOutlineOutlined></DeleteOutlineOutlined>
+										delete post
+									</li>
+								</ul>
+							) : null}
+						</div>
 					</div>
 				</div>
 				<div className="postCenter">

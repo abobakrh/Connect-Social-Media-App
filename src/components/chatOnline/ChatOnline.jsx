@@ -39,7 +39,7 @@ export default function ChatOnline({ onlineUsers, currentId, setCurrentChat }) {
 				<div
 					key={o._id}
 					className="friend"
-					onClick={() => handleClick(o)}
+					onClick={setCurrentChat ? () => handleClick(o) : null}
 				>
 					<div className="onlineImgContainer">
 						<img

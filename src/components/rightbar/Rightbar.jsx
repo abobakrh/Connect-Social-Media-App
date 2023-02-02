@@ -1,12 +1,13 @@
 import "./Rightbar.css";
-import Online from "../online/Online";
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { useEffect } from "react";
 import axios from "axios";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Add, Remove } from "@mui/icons-material";
+import { io } from "socket.io-client";
+import ChatOnline from "../chatOnline/ChatOnline";
 
 export default function Rightbar({ user }) {
 	const publicFolder = process.env.PUBLIC_URL;
@@ -15,10 +16,27 @@ export default function Rightbar({ user }) {
 	const [followed, setFollowed] = useState(
 		currentUser.followings.includes(user?._id)
 	);
+	const [onlineUsers, setOnlineUsers] = useState([]);
+	const socket = useRef();
+
+	useEffect(() => {
+		socket.current = io("ws://localhost:8900");
+	}, []);
 
 	useEffect(() => {
 		setFollowed(currentUser.followings.includes(user?._id));
 	}, [currentUser, user]);
+
+	useEffect(() => {
+		socket.current.emit("addUser", currentUser._id);
+	}, [currentUser]);
+	useEffect(() => {
+		socket.current.on("getUsers", (users) => {
+			setOnlineUsers(
+				currentUser.followings.filter((f) => users.some((u) => u.userId === f))
+			);
+		});
+	}, [currentUser]);
 
 	useEffect(() => {
 		const getFriends = async () => {
@@ -69,14 +87,14 @@ export default function Rightbar({ user }) {
 				/>
 				<h4 className="rightbarTitle">Online Friends</h4>
 				<div className="rightbarFriendList">
-					{friends.map((u) => (
-						<Link
-							key={u._id}
-							to="/messenger"
-						>
-							<Online user={u} />
-						</Link>
-					))}
+					{onlineUsers ? (
+						<ChatOnline
+							onlineUsers={onlineUsers}
+							currentId={currentUser._id}
+						/>
+					) : (
+						<h4>no online friends</h4>
+					)}
 				</div>
 			</>
 		);

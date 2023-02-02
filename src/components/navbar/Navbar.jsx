@@ -41,8 +41,10 @@ export default function Navbar() {
 					</div>
 					<div className="navbarIcons">
 						<div className="navbarItem">
-							<Chat />
-							<span className="navbarItemCount">1</span>
+							<Link to="/messenger">
+								<Chat />
+								<span className="navbarItemCount">1</span>
+							</Link>
 						</div>
 					</div>
 					<div className="navbarIcons">

@@ -34,7 +34,7 @@ export default function Messenger() {
 		});
 	}, []);
 	useEffect(() => {
-		console.log("user changed");
+		// console.log("user changed");
 		socket.current.emit("addUser", user._id);
 	}, [user]);
 	useEffect(() => {

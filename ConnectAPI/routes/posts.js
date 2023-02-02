@@ -36,6 +36,9 @@ router.put("/:postId", async (req, res) => {
 router.delete("/:postId", async (req, res) => {
 	try {
 		const post = await Post.findById(req.params.postId);
+		console.log(
+			`user id received is ${req.body.userId} and post user id is ${post.userId} and found post is ${post.desc}`
+		);
 		if (post.userId === req.body.userId) {
 			await post.deleteOne();
 			res.status(200).json("post deleted successfully");
